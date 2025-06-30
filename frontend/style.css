@@ -1,0 +1,121 @@
+/* frontend/style.css */
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap');
+
+:root {
+    --bg-color: #1a1a1a;
+    --surface-color: #2c2c2c;
+    --primary-color: #00aaff;
+    --primary-hover-color: #0088cc;
+    --text-color: #e0e0e0;
+    --border-color: #444;
+    --success-color: #28a745;
+    --error-color: #dc3545;
+    --canvas-bg: #101010;
+}
+
+body {
+    font-family: 'Roboto Mono', monospace;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 30px;
+    gap: 30px;
+}
+
+.panel {
+    background-color: var(--surface-color);
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    border: 1px solid var(--border-color);
+}
+
+.controls {
+    width: 380px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+label {
+    font-weight: 400;
+    color: var(--text-color);
+    font-size: 0.9rem;
+}
+
+input[type="number"] {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Roboto Mono', monospace;
+    font-size: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    background-color: var(--primary-color);
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 700;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+button:hover {
+    background-color: var(--primary-hover-color);
+}
+
+button:active {
+    transform: scale(0.98);
+}
+
+button:disabled {
+    background-color: #555;
+    cursor: not-allowed;
+}
+
+#robot-status-panel {
+    padding: 15px;
+    background-color: var(--bg-color);
+    border-radius: 6px;
+    text-align: center;
+}
+
+#status-text {
+    font-size: 1rem;
+    font-weight: 700;
+}
+#status-coords {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-top: 5px;
+    height: 1em; /* Reserve space to prevent layout shift */
+}
+
+canvas {
+    border: 1px solid var(--border-color);
+    background-color: var(--canvas-bg);
+}

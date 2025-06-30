@@ -1,0 +1,61 @@
+<!-- frontend/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Control System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="panel controls">
+        <h2>Configuration</h2>
+        
+        <div class="input-group">
+            <label for="wallWidth">Wall Width (m)</label>
+            <input type="number" id="wallWidth" value="5" step="0.1">
+        </div>
+        <div class="input-group">
+            <label for="wallHeight">Wall Height (m)</label>
+            <input type="number" id="wallHeight" value="5" step="0.1">
+        </div>
+        <!-- NEW INPUT FIELD -->
+        <div class="input-group">
+            <label for="robotWidth">Robot Tool Width (m)</label>
+            <input type="number" id="robotWidth" value="0.1" step="0.01" min="0.01">
+        </div>
+
+        <h2>Obstacle (Window)</h2>
+        <div class="input-group">
+            <label for="obsX">Obstacle X (m)</label>
+            <input type="number" id="obsX" value="2" step="0.1">
+        </div>
+        <div class="input-group">
+            <label for="obsY">Obstacle Y (m)</label>
+            <input type="number" id="obsY" value="2" step="0.1">
+        </div>
+        <div class="input-group">
+            <label for="obsWidth">Obstacle Width (m)</label>
+            <input type="number" id="obsWidth" value="2" step="0.1">
+        </div>
+        <div class="input-group">
+            <label for="obsHeight">Obstacle Height (m)</label>
+            <input type="number" id="obsHeight" value="2" step="0.1">
+        </div>
+        
+        <button id="calculateBtn">Deploy Robot</button>
+
+        <div id="robot-status-panel">
+            <div id="status-text">Status: Idle</div>
+            <div id="status-coords"></div>
+        </div>
+    </div>
+
+    <div class="panel visualization">
+        <h2>Live View</h2>
+        <canvas id="pathCanvas" width="500" height="500"></canvas>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
