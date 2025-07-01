@@ -93,8 +93,9 @@ To verify that the API is working correctly, you can run the automated tests. Op
 pytest
 ```
 
+---
 
-##Future Advancements:
+## Future Advancements:
 - Multiple Obstacle Support: Upgrade the path planning algorithm to handle a list of multiple, potentially overlapping obstacles.
 - Advanced Input Validation: Implement more robust validation (e.g., using Pydantic custom validators) to handle edge cases, such as an obstacle being larger than or outside the wall.
 - Containerization: Create a Dockerfile to containerize the application with Docker, making it completely portable and easy to deploy.
