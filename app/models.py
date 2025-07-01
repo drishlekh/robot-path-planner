@@ -5,8 +5,7 @@ from sqlalchemy.orm import relationship
 
 from .database import Base
 
-# This class defines the 'trajectories' table in the database.
-# SQLAlchemy uses this model to understand how to interact with the table.
+
 class Trajectory(Base):
     __tablename__ = "trajectories"
 
