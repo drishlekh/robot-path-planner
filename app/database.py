@@ -6,13 +6,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
 # --- Database Setup ---
-# The database URL tells SQLAlchemy where our database is located.
-# We're creating a file named 'robot_trajectories.db' in the project's root directory.
+
+# creating a file named 'robot_trajectories.db' in the project's root directory.
 DATABASE_URL = "sqlite:///./robot_trajectories.db"
 
-# The 'engine' is the core interface to the database.
-# The 'connect_args' is needed only for SQLite to allow it to be used by multiple threads,
-# which is what FastAPI does.
+
 engine = create_engine(
     DATABASE_URL, connect_args={"check_same_thread": False}
 )

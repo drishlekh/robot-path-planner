@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Configuration ---
     const API_BASE_URL = "http://127.0.0.1:8000/api/v1";
-    const ANIMATION_SPEED_FACTOR = 0.5; // Lower is faster, higher is slower
+    const ANIMATION_SPEED_FACTOR = 0.5; // Lower is faster, e.g., 0.1. Higher is slower, e.g., 10.
 
     // --- DOM Elements ---
     const calculateBtn = document.getElementById("calculateBtn");
@@ -43,8 +43,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const trajectoryData = await createResponse.json();
             setUIState("painting");
-            drawInitialState(trajectoryData); // Draw the red obstacle
-            animateRobot(trajectoryData, toolWidth); // Start the painting animation
+            drawInitialState(trajectoryData);
+            animateRobot(trajectoryData, toolWidth);
 
         } catch (error) {
             console.error("Failed to process trajectory:", error);
@@ -52,22 +52,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function getInputs() { /* ... same as before ... */ }
-    function setUIState(state, message = "") { /* ... same as before ... */ }
-    function drawInitialState(trajectory) { /* ... same as before ... */ }
-    
-    // --- NEW, SIMPLIFIED, AND CORRECT ANIMATION LOGIC ---
+    // --- Simplified and Correct Animation Logic ---
     function animateRobot(trajectory, toolWidth) {
         const scale = canvas.width / trajectory.wall_dimensions.width;
         const path = trajectory.path;
-        const toolWidthPx = Math.max(2, toolWidth * scale); // Ensure line is at least 2px thick
+        // Ensure the line is thick enough to be visible but not overly so
+        const toolWidthPx = Math.max(1.5, toolWidth * scale);
 
         let i = 1; // Start from the second point to draw the first line segment
 
         function drawNextSegment() {
             if (i >= path.length) {
                 setUIState("complete");
-                // Final coordinate update
                 const finalPoint = path[path.length - 1];
                 statusCoords.textContent = `X: ${finalPoint.x.toFixed(2)}m, Y: ${finalPoint.y.toFixed(2)}m`;
                 return;
@@ -82,21 +78,21 @@ document.addEventListener('DOMContentLoaded', () => {
             const x2 = p2.x * scale;
             const y2 = canvas.height - (p2.y * scale);
             
-            // Draw the paint stroke
+            // Draw the paint stroke for the current segment
             ctx.beginPath();
             ctx.moveTo(x1, y1);
             ctx.lineTo(x2, y2);
             ctx.strokeStyle = "rgba(0, 170, 255, 0.9)";
             ctx.lineWidth = toolWidthPx;
-            ctx.lineCap = "round"; // Makes the paint strokes look smoother
+            ctx.lineCap = "round"; // Makes the paint stroke joins look better
             ctx.stroke();
 
-            // Update status text with the robot's current position
+            // Update status with the robot's current end-of-segment position
             statusCoords.textContent = `X: ${p2.x.toFixed(2)}m, Y: ${p2.y.toFixed(2)}m`;
             
             i++;
 
-            // Use a small timeout to control animation speed
+            // Use a small timeout to control animation speed, making it watchable
             setTimeout(() => {
                 animationFrameId = requestAnimationFrame(drawNextSegment);
             }, ANIMATION_SPEED_FACTOR);
@@ -105,7 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         animationFrameId = requestAnimationFrame(drawNextSegment);
     }
     
-    // --- Helper functions ---
+    // --- Helper functions (no changes needed) ---
     function getInputs() {
         return {
             requestBody: {
